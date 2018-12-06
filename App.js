@@ -22,6 +22,14 @@ class DetailsScreen extends React.Component {
         return (
             <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
                 <Text>Details Screen</Text>
+                <Button
+                    title="Go to Details... again  use push"
+                    onPress={() => this.props.navigation.push('Details')}
+                />
+                <Button
+                    title="Go back"
+                    onPress={() => this.props.navigation.goBack()}
+                />
             </View>
         );
     }
