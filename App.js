@@ -1,12 +1,12 @@
 import React from 'react';
-import { Button, Image, Platform, View, Text } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { Button, Image, View, Text } from 'react-native';
+import { createStackNavigator, createAppContainer } from 'react-navigation'; // 1.0.0-beta.27
 
 class LogoTitle extends React.Component {
     render() {
         return (
             <Image
-                source={require('./src/imags/spiro.png')}
+                source={require('./spiro.png')}
                 style={{ width: 30, height: 30 }}
             />
         );
@@ -15,14 +15,19 @@ class LogoTitle extends React.Component {
 
 class HomeScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
+        const params = navigation.state.params || {};
+
         return {
             headerTitle: <LogoTitle />,
-            headerRight: (
+            headerLeft: (
                 <Button
-                    onPress={navigation.getParam('increaseCount')}
-                    title="+1"
-                    color={Platform.OS === 'ios' ? '#fff' : null}
+                    onPress={() => navigation.navigate('MyModal')}
+                    title="Info"
+                    color="#fff"
                 />
+            ),
+            headerRight: (
+                <Button onPress={params.increaseCount} title="+1" color="#fff" />
             ),
         };
     };
@@ -36,7 +41,7 @@ class HomeScreen extends React.Component {
     };
 
     _increaseCount = () => {
-        this.setState({ count: this.state.count + 2 });
+        this.setState({ count: this.state.count + 1 });
     };
 
     render() {
@@ -102,7 +107,21 @@ class DetailsScreen extends React.Component {
     }
 }
 
-const RootStack = createStackNavigator(
+class ModalScreen extends React.Component {
+    render() {
+        return (
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 30 }}>This is a modal!</Text>
+                <Button
+                    onPress={() => this.props.navigation.goBack()}
+                    title="Dismiss"
+                />
+            </View>
+        );
+    }
+}
+
+const MainStack = createStackNavigator(
     {
         Home: {
             screen: HomeScreen,
@@ -122,6 +141,21 @@ const RootStack = createStackNavigator(
                 fontWeight: 'bold',
             },
         },
+    }
+);
+
+const RootStack = createStackNavigator(
+    {
+        Main: {
+            screen: MainStack,
+        },
+        MyModal: {
+            screen: ModalScreen,
+        },
+    },
+    {
+        mode: 'modal',
+        headerMode: 'none',
     }
 );
 
