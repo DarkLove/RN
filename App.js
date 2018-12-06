@@ -9,7 +9,10 @@ class HomeScreen extends React.Component {
                 <Text>Home Screen</Text>
                 <Button
                     title="Go to Details"
-                    onPress={() => this.props.navigation.navigate('Details')}
+                    onPress={() => this.props.navigation.navigate('Details',{
+                        name:"fx",
+                        age:23
+                    })}
                 />
             </View>
         );
@@ -18,10 +21,15 @@ class HomeScreen extends React.Component {
 
 
 class DetailsScreen extends React.Component {
+
     render() {
+
+        const { navigation } = this.props;
+        const name = navigation.getParam('name', 'NO-NAME');
+        const age = navigation.getParam('age', 0);
         return (
             <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                <Text>Details Screen</Text>
+                <Text>Details Screen{"     "+name+"    "+age}</Text>
                 <Button
                     title="Go to Details... again  use push"
                     onPress={() => this.props.navigation.push('Details')}
