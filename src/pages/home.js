@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View ,Image,StyleSheet} from 'react-native';
+import { Text, View ,Image,StyleSheet,ScrollView} from 'react-native';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 import Sport from './sport'
@@ -14,20 +14,39 @@ class Home extends React.Component {
         ];
         return (
             <View style={styles.s000}>
-                <View style={styles.s001}>
-                {menus.map(item =>
-                    <View key={item.key} style={styles.s002}>
-                        <Image source={item.path} style={styles.s003}/>
-                        <Text style={styles.s004}>{item.title} </Text>
-                    </View>
-                )}
+                <View style={styles.ab}>
+                    <Image source={require('../imags/MP-LOGO.png')} style={{width:100,height:"auto"}}/>
                 </View>
+                <ScrollView>
+                    <View style={styles.s001}>
+                        {menus.map(item =>
+                            <View key={item.key} style={styles.s002}>
+                                <Image source={item.path} style={styles.s003}/>
+                                <Text style={styles.s004}>{item.title} </Text>
+                            </View>
+                        )}
+                    </View>
+                </ScrollView>
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
+
+
+    ab:{
+        height:50,
+        width:"100%",
+        position:"absolute",
+        backgroundColor:"#9cc28b",
+        zIndex:1,
+
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+
+    },
+
     s000: {
         flex: 1,
         flexDirection: 'column',
@@ -39,7 +58,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         marginLeft:30,
-        marginRight:30
+        marginRight:30,
+        marginTop:50,
     },
 
     s002: {
