@@ -7,19 +7,20 @@ import My from './my'
 
 class Home extends React.Component {
     render() {
+        let menus = [
+            {key: 'huiyuan', title: "会员", path: require('../imags/huiyuan.png')},
+            {key: 'tuanke', title: "团课", path: require('../imags/tuanke.png')},
+            {key: 'jiaolian',title: "教练", path: require('../imags/jiaolian.png')}
+        ];
         return (
-            <View style={styles.s001}>
-                <View style={styles.s002}>
-                    <Image source={require('../imags/huiyuan.png')} style={styles.s003}/>
-                    <Text>会员</Text>
-                </View>
-                <View  style={styles.s002}>
-                    <Image source={require('../imags/huiyuan.png')} style={styles.s003}/>
-                    <Text>会员</Text>
-                </View>
-                <View style={styles.s002}>
-                    <Image source={require('../imags/huiyuan.png')} style={styles.s003}/>
-                    <Text>会员</Text>
+            <View style={styles.s000}>
+                <View style={styles.s001}>
+                {menus.map(item =>
+                    <View key={item.key} style={styles.s002}>
+                        <Image source={item.path} style={styles.s003}/>
+                        <Text style={styles.s004}>{item.title} </Text>
+                    </View>
+                )}
                 </View>
             </View>
         );
@@ -27,6 +28,12 @@ class Home extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    s000: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor:"#fafafa"
+    },
+
     s001: {
         flex: 1,
         flexDirection: 'row',
@@ -36,9 +43,9 @@ const styles = StyleSheet.create({
     },
 
     s002: {
-        width: 50,
-        height: 50,
-        backgroundColor: 'skyblue',
+        width: 90,
+        height: 60,
+        backgroundColor: '#ffffff',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
         alignItems: 'center',
@@ -47,6 +54,11 @@ const styles = StyleSheet.create({
     s003: {
         width:20,
         height:20
+    },
+
+    s004: {
+       fontSize:9,
+       color:"#464955"
     },
 });
 
