@@ -7,6 +7,7 @@ import My from './my'
 import PickerForCity from '../components/pickerForCity'
 import {getSelectorArray} from '../utils/common'
 
+import Icon from 'react-native-vector-icons/FontAwesome';
 class Home extends React.Component {
 
     constructor(props){
@@ -40,6 +41,7 @@ class Home extends React.Component {
                     </View>
                 </TouchableNativeFeedback>
                 <ScrollView style={{marginTop:50}}>
+                    <Icon name="rss-square" size={30} color="#cccccc" />
                     <View style={{flexDirection: 'column',flex: 1,}}>
                         <Swiper height={120} horizontal={true} autoplay autoplayTimeout={3}>
                             <View style={styles.slide1}>
