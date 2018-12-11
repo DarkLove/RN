@@ -1,11 +1,21 @@
 import React from 'react';
-import { Text, View ,Image,StyleSheet,ScrollView} from 'react-native';
+import { Text, View ,Image,StyleSheet,ScrollView,TouchableNativeFeedback} from 'react-native';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import Swiper from 'react-native-swiper';
 import Sport from './sport'
 import My from './my'
+import PickerForCity from '../components/pickerForCity'
+import {getSelectorArray} from '../utils/common'
 
 class Home extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state={
+            showPickerCity:false,
+        }
+    }
+
     render() {
         let menus = [
             {key: 'huiyuan', title: "会员", path: require('../imags/huiyuan.png')},
@@ -14,12 +24,24 @@ class Home extends React.Component {
         ];
         return (
             <View style={styles.s000}>
-                <View style={styles.ab}>
-                    <Image source={require('../imags/MP-LOGO.png')} style={{width:266,height:36,}}/>
-                </View>
+                <PickerForCity name={"FX"} isShow={this.state.showPickerCity} citys={getSelectorArray("citys")} callBack={(city)=>{
+                    this.setState({
+                        showPickerCity:false
+                    })
+                }}/>
+
+                <TouchableNativeFeedback onPress={()=>{
+                    this.setState({
+                        showPickerCity:true
+                    })
+                }}>
+                    <View style={styles.ab}>
+                        <Image source={require('../imags/MP-LOGO.png')} style={{width:266,height:36,}} />
+                    </View>
+                </TouchableNativeFeedback>
                 <ScrollView style={{marginTop:50}}>
                     <View style={{flexDirection: 'column',flex: 1,}}>
-                        <Swiper style={styles.wrapper} showsButtons={true} height={120} horizontal={false} autoplay autoplayTimeout={1}>
+                        <Swiper height={120} horizontal={true} autoplay autoplayTimeout={3}>
                             <View style={styles.slide1}>
                                 <Text style={styles.text}>Hello Swiper</Text>
                             </View>
@@ -82,7 +104,6 @@ const styles = StyleSheet.create({
         height:50,
         width:"100%",
         position:"absolute",
-        // backgroundColor:"#9cc28b",
         zIndex:1,
 
         flexDirection: 'row',
